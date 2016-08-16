@@ -1,1 +1,8 @@
 language: java
+deploy:
+  provider: bintray
+  user: mikemole
+  key:
+    secure: U1F87my0jM+oN6KaXQwY2rntZ/o1dmaXG5ioyjMUC51+faJaJlVy2svlh5I0nwPQfuzHFm/HD+AmHq/52RD3qdaLvUNdewL9PBGTw6ohQne6N2RA8FH4/fUvvgOCaeBF6HBXhcwcth+0Y2XAtbJ2YuTwl8cpCMj6p9oBqrDnQOVi9lBRivCeU1KFZZb4rxQ4Z0fWcAOd2u3QC1C+gmm4uwoMIT8QBGKlTst2lSnib56dtamIFlTqWEuiUQJNmBZXVOJ0TzkQrSzLdtcDICvNsQ24FClYaHUSDwGHj7wODngZKE+5oU32H6nay4Kws0/fkeVgZThLOAb4wDWyNsEZkC6uiU9dPPLm/ETSo7p6QS7XUmIVbExkOHb93AG1mYw4AdlFrYtqWsYb/DKWwKkJzsYP1qTcCwHxNdf9TfoQo1zgiSbzfCV4PTTdtcK3T2ly/0uH98eU7YFnoAHcWaM867xkWj0daL1k1QoxfK/U8N94nKMx7M9ZOOusvmesWbx/EaD+Alsxw0FXMGcEE180fkv2qYvUj7WEEx+g4Y8LHBlrFsJQAzyMx1iii+fX1b/rJdeI+AllG+ex5s+xiBBjQJhnI5WEkR+tU5JSF3pmX2QYIbRPDr7xwRFwdCCw3VUBZbv3SJfDo6vCibklgTueeMUi4IgmnGtslPC9VAtNbQ4=
+  on:
+    all_branches: true
