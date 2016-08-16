@@ -23,7 +23,7 @@
     <version>39</version>
   </parent>
 
-  <groupId>com.github.lookout</groupId>
+  <groupId>com.github.mikemole</groupId>
   <artifactId>commons-compress</artifactId>
   <version>1.12.1-SNAPSHOT</version>
   <name>Apache Commons Compress</name>
@@ -380,5 +380,11 @@ jar, tar, zip, dump, 7z, arj.
       </build>
     </profile>
   </profiles>
-
+  <distributionManagement>
+    <repository>
+       <id>bintray-mikemole-apache-commons-compress</id>
+       <name>mikemole-apache-commons-compress</name>
+       <url>https://api.bintray.com/maven/mikemolel/apache/commons-compress</url>
+    </repository>
+  </distributionManagement>
 </project>
