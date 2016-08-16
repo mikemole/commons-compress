@@ -380,11 +380,4 @@ jar, tar, zip, dump, 7z, arj.
       </build>
     </profile>
   </profiles>
-  <distributionManagement>
-    <repository>
-       <id>bintray-mikemole-apache-commons-compress</id>
-       <name>mikemole-apache-commons-compress</name>
-       <url>https://api.bintray.com/maven/mikemolel/apache/commons-compress</url>
-    </repository>
-  </distributionManagement>
 </project>

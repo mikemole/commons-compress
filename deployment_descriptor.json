@@ -1,0 +1,18 @@
+{
+    "package": {
+        "name": "commons-compress",
+        "repo": "apache",
+        "subject": "mikemole",
+        "vcs_url": "https://github.com/lookout/commons-compress.git"
+    },
+
+    "version": {
+        "name": "1.12.1"
+    },
+
+    "files":
+        [
+        {"includePattern": "target/(.*\\.jar)", "excludePattern": ".*/do-not-deploy/.*", "uploadPattern": "$1"}
+        ],
+    "publish": true
+}
