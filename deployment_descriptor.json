@@ -13,7 +13,7 @@
 
     "files":
         [
-        {"includePattern": "target/commons-compress-(.*\\.jar)", "excludePattern": ".*/do-not-deploy/.*", "uploadPattern": "$1"}
+        {"includePattern": "target/(commons-compress-.*\\.jar)", "excludePattern": ".*/do-not-deploy/.*", "uploadPattern": "$1"}
         ],
     "publish": false
 }
