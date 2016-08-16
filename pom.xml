@@ -23,7 +23,7 @@
     <version>39</version>
   </parent>
 
-  <groupId>org.apache.commons</groupId>
+  <groupId>com.github.lookout</groupId>
   <artifactId>commons-compress</artifactId>
   <version>1.12.1-SNAPSHOT</version>
   <name>Apache Commons Compress</name>
