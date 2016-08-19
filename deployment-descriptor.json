@@ -1,0 +1,19 @@
+{
+    "package": {
+        "name": "commons-compress",
+        "repo": "apache",
+        "subject": "lookout",
+        "vcs_url": "https://github.com/lookout/commons-compress.git",
+        "licenses": ["Apache-2.0"]
+    },
+
+    "version": {
+        "name": "1.12.1"
+    },
+
+    "files":
+        [
+        {"includePattern": "target/(commons-compress-.*\\.jar)", "excludePattern": ".*/do-not-deploy/.*", "uploadPattern": "$1"}
+        ],
+    "publish": true
+}
