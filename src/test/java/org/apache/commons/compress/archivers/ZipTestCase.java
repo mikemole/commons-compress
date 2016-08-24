@@ -216,16 +216,18 @@ public final class ZipTestCase extends AbstractTestCase {
             in = new ArchiveStreamFactory().createArchiveInputStream("zip", is);
 
             ZipArchiveEntry entry = null;
-            while((entry = (ZipArchiveEntry)in.getNextEntry()) != null) {
+            while ((entry = (ZipArchiveEntry) in.getNextEntry()) != null) {
                 results.add(entry.getName());
 
                 final ArchiveInputStream nestedIn = new ArchiveStreamFactory().createArchiveInputStream("zip", in);
                 ZipArchiveEntry nestedEntry = null;
-                while((nestedEntry = (ZipArchiveEntry)nestedIn.getNextEntry()) != null) {
+                while ((nestedEntry = (ZipArchiveEntry) nestedIn.getNextEntry()) != null) {
                     results.add(nestedEntry.getName());
                 }
-               // nested stream must not be closed here
+                // nested stream must not be closed here
             }
+        } catch (IOException ex) {
+            // expected since you cannot create a final ArchiveInputStream from test3.xml
         } finally {
             if (in != null) {
                 in.close();

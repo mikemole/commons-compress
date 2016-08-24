@@ -236,6 +236,26 @@ public class ZipArchiveInputStreamTest {
         }
     }
 
+    /**
+     * <code>getNextZipEntry()</code> should throw an IOException rather than return
+     * <code>null</code> when an unexpected structure is encountered.
+     */
+    @Test
+    public void testThrowOnInvalidEntry() throws Exception {
+        final InputStream is = ZipArchiveInputStreamTest.class
+                .getResourceAsStream("/invalid-zip.zip");
+        final ZipArchiveInputStream zip = new ZipArchiveInputStream(is);
+
+        try {
+            zip.getNextZipEntry();
+            fail("IOException expected");
+        } catch (IOException expected) {
+            assertTrue(expected.getMessage().contains("Unexpected record signature"));
+        } finally {
+            zip.close();
+        }
+    }
+
     private static byte[] readEntry(ZipArchiveInputStream zip, ZipArchiveEntry zae) throws IOException {
         final int len = (int)zae.getSize();
         final byte[] buff = new byte[len];
