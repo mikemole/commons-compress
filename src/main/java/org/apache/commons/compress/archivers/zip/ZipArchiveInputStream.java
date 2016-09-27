@@ -615,10 +615,7 @@ public class ZipArchiveInputStream extends ArchiveInputStream {
             return;
         }
 
-        // Ensure all entry bytes are read
-        if (currentEntryHasOutstandingBytes()) {
-            drainCurrentEntryData();
-        } else {
+        if (!currentEntryHasOutstandingBytes()) {
             skip(Long.MAX_VALUE);
 
             final long inB = current.entry.getMethod() == ZipArchiveOutputStream.DEFLATED
@@ -633,12 +630,10 @@ public class ZipArchiveInputStream extends ArchiveInputStream {
                 pushback(buf.array(), buf.limit() - diff, diff);
                 current.bytesReadFromStream -= diff;
             }
-
-            // Drain remainder of entry if not all data bytes were required
-            if (currentEntryHasOutstandingBytes()) {
-                drainCurrentEntryData();
-            }
         }
+
+        // Ensure all entry bytes are read
+        drainCurrentEntryData();
 
         if (lastStoredEntry == null && current.hasDataDescriptor) {
             readDataDescriptor();
