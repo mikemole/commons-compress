@@ -247,8 +247,7 @@ public class ZipArchiveInputStream extends ArchiveInputStream {
             return null;
         }
         if (!sig.equals(ZipLong.LFH_SIG)) {
-            final String msg = String.format("Unexpected record signature: 0X%X", sig.getValue());
-            throw new IOException(msg);
+            throw new ZipException(String.format("Unexpected record signature: 0X%X", sig.getValue()));
         }
 
         int off = WORD;
