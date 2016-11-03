@@ -244,9 +244,10 @@ public class ZipArchiveInputStream extends ArchiveInputStream {
         if (sig.equals(ZipLong.CFH_SIG) || sig.equals(ZipLong.AED_SIG)) {
             hitCentralDirectory = true;
             skipRemainderOfArchive();
+            return null;
         }
         if (!sig.equals(ZipLong.LFH_SIG)) {
-            return null;
+            throw new ZipException(String.format("Unexpected record signature: 0X%X", sig.getValue()));
         }
 
         int off = WORD;
@@ -615,11 +616,7 @@ public class ZipArchiveInputStream extends ArchiveInputStream {
             return;
         }
 
-        // Ensure all entry bytes are read
-        if (current.bytesReadFromStream <= current.entry.getCompressedSize()
-                && !current.hasDataDescriptor) {
-            drainCurrentEntryData();
-        } else {
+        if (!currentEntryHasOutstandingBytes()) {
             skip(Long.MAX_VALUE);
 
             final long inB = current.entry.getMethod() == ZipArchiveOutputStream.DEFLATED
@@ -632,8 +629,12 @@ public class ZipArchiveInputStream extends ArchiveInputStream {
             // Pushback any required bytes
             if (diff > 0) {
                 pushback(buf.array(), buf.limit() - diff, diff);
+                current.bytesReadFromStream -= diff;
             }
         }
+
+        // Ensure all entry bytes are read
+        drainCurrentEntryData();
 
         if (lastStoredEntry == null && current.hasDataDescriptor) {
             readDataDescriptor();
@@ -643,6 +644,18 @@ public class ZipArchiveInputStream extends ArchiveInputStream {
         buf.clear().flip();
         current = null;
         lastStoredEntry = null;
+    }
+
+    /**
+     * If the compressed size of the current entry is included in the entry header
+     * and there are any outstanding bytes in the underlying stream, then
+     * this returns true.
+     *
+     * @return true, if current entry is determined to have outstanding bytes, false otherwise
+     */
+    private boolean currentEntryHasOutstandingBytes() {
+        return current.bytesReadFromStream <= current.entry.getCompressedSize()
+                && !current.hasDataDescriptor;
     }
 
     /**
